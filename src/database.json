@@ -1,0 +1,22 @@
+[
+    {
+        "shape": "oval",
+        "color": "red"
+    },
+    {
+        "shape": "round",
+        "color": "royalblue"
+    },
+    {
+        "shape": "triangle",
+        "color": "green"
+    },
+    {
+        "shape": "rectangle",
+        "color": "yellow"
+    },
+    {
+        "shape": "square",
+        "color": "lightblue"
+    }
+]
