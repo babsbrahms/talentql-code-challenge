@@ -2,15 +2,26 @@ import React, { useContext } from 'react';
 import { AppContext } from "../context/AppContext"
 
 const Header = () => {
-    const { credential, login } = useContext(AppContext)
+    const { token, login, logout } = useContext(AppContext)
+
+    const authenticate = () => {
+        if (token) {
+            // login!(process.env.REACT_APP_EMAIL!, process.env.REACT_APP_PASSWORD!)
+            login!("swewe", "sdsds")
+
+        } else {
+            logout!()
+        }
+    }
+
     return (
         <nav>
             <h1>
                 SHAPES
             </h1>
 
-            <span onClick={() => login!("app.gmail.com", "12345")}>
-                {credential? "Logout 🔒" : "Login 🔓"}
+            <span onClick={() => authenticate()}>
+                {token? "Logout 🔒" : "Login 🔓"}
             </span>
         </nav>
     )

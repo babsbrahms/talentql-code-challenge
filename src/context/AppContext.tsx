@@ -3,7 +3,7 @@ import AppReducer from "./AppReducer"
 import ContextType from "./type"
 // interface ContextType {
 //     email: string
-//     credential: string,
+//     token: string,
 //     login?: (email: string, password:string) => void
 // }
 
@@ -13,7 +13,7 @@ interface ProviderType  {
 
 const defautState: ContextType = {
     email: "",
-    credential: ""
+    token: ""
 }
 
 export const AppContext = createContext<ContextType >(defautState)
@@ -26,16 +26,23 @@ const AppProvider:React.FC<ProviderType> = ({ children}) => {
             type: "LOGIN",
             payload: {
                 email: email,
-                credential: password
+                token: password
             }
+        })
+    }
+
+    const logout =() => {
+        dispatch({
+            type: "LOGOUT"
         })
     }
 
     return (
         <AppContext.Provider value={{
             email: state.email,
-            credential: state.credential,
-            login
+            token: state.token,
+            login,
+            logout
         }}>
             {children}
         </AppContext.Provider>
