@@ -62,7 +62,7 @@ export class AppPage extends Component<Props, State> {
     }
 
     calculateSelectedItems = () => {
-        
+
     }
 
     render() {
@@ -71,18 +71,18 @@ export class AppPage extends Component<Props, State> {
             <div className="container">
                 <h2>Filters</h2>
                 <section>
-                    <h4>Shapes</h4>
+                    <h4 className="sub-lead">Shapes</h4>
                     {selectedShapes.map(({ shape, selected}, index) => <ShapeButton key={shape} shape={shape} active={selected} onClick={() => this.toggleShape(index)} />)}
                 </section>
 
                 <section>
-                    <h4>Colors</h4>
+                    <h4 className="sub-lead">Colors</h4>
                     {selectedColors.map(({ color, selected}, index) => <ColorButton key={color} color={color} active={selected} onClick={() => this.toggleColor(index)}  />)}
                 </section>
 
                 
                 <section >
-                    <h2>{title} <span>{selectedItems.length}</span></h2>
+                    <h2 className="lead-text">{title} <span>({selectedItems.length})</span></h2>
 
                     <div className="grid-container">
                     {selectedItems.map(({ color, shape}, index) => <Item key={`${shape}-${index}`} color={color} shape={shape} />)}

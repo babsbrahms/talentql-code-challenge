@@ -16,9 +16,9 @@ const defautState: ContextType = {
     credential: ""
 }
 
-const AppContext = createContext<ContextType >(defautState)
+export const AppContext = createContext<ContextType >(defautState)
 
-const AppContextProvider:React.FC<ProviderType> = ({ children}) => {
+const AppProvider:React.FC<ProviderType> = ({ children}) => {
     const [state, dispatch] = useReducer(AppReducer, defautState )
 
     const login =(email: string, password: string) => {
@@ -43,4 +43,4 @@ const AppContextProvider:React.FC<ProviderType> = ({ children}) => {
 }
 
 
-export default AppContextProvider;
+export default AppProvider;

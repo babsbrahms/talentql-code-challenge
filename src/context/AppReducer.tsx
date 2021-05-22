@@ -1,6 +1,6 @@
 import ContextType from "./type"
 
-interface actions { type: "LOGIN", payload: { email: string, credential: string}}
+type actions  = | { type: "LOGIN", payload: { email: string, credential: string}} | { type:"LOGOUT" }
 
 let initState: ContextType = {
         email: "",
@@ -12,6 +12,8 @@ const AppReducer = (state=initState, action: actions) => {
 
             return { ...state, email: action.payload.email, credential: action.payload.credential  }
     
+        case "LOGOUT":
+            return {...state, email: "", token: ""}
         default:
             return state
     }
