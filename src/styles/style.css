@@ -17,6 +17,17 @@ nav > span {
   cursor: pointer;
 }
 
+.auth {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth > h3 {
+  text-align: center;
+}
+
 .container {
   background-color: #f5f6fc;
   padding: 10px 30px;

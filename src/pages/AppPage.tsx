@@ -5,7 +5,7 @@ import Item from "../components/Item";
 import { Shape, Color } from "../dataType";
 import { SColors, SShapes, SItems} from "./appType"
 import db from "../database.json";
-import "../styles/appPage.css";
+
 
 
 interface Props { 
@@ -137,7 +137,7 @@ export class AppPage extends Component<Props, State> {
         } else if ((colors.length > 2) && (shapes.length === 1)) {
             val = `Multiple ${shapes[0]} items`
         } else if ((shapes.length === 1) && (colors.length === 1)) {
-            val = `${shapes[0][0]}${shapes[0].slice(1)} ${colors[0]} items`
+            val = `${shapes[0][0].toUpperCase()}${shapes[0].slice(1)} ${colors[0]} items`
         } else {
             // was not specified as in the requirement
             val = "Multiple items"
@@ -154,12 +154,16 @@ export class AppPage extends Component<Props, State> {
                 <h2>Filters</h2>
                 <section>
                     <h4 className="sub-lead">Shapes</h4>
-                    {selectedShapes.map(({ shape, selected}, index) => <ShapeButton key={shape} shape={shape} active={selected} onClick={() => this.toggleShape(index)} />)}
+                    <div data-testid="shapes">
+                        {selectedShapes.map(({ shape, selected}, index) => <ShapeButton key={shape} shape={shape} active={selected} onClick={() => this.toggleShape(index)} />)}
+                    </div>
                 </section>
 
                 <section>
                     <h4 className="sub-lead">Colors</h4>
-                    {selectedColors.map(({ color, selected}, index) => <ColorButton key={color} color={color} active={selected} onClick={() => this.toggleColor(index)}  />)}
+                    <div data-testid="colors">
+                        {selectedColors.map(({ color, selected}, index) => <ColorButton key={color} color={color} active={selected} onClick={() => this.toggleColor(index)}  />)}
+                    </div>
                 </section>
 
                 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from "../context/AppContext"
+import { AppContext } from "../context/AppContext";
 
 const Header = () => {
     const { token, login, logout } = useContext(AppContext)

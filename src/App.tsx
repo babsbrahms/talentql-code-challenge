@@ -1,15 +1,22 @@
 import React from 'react';
 import AppPage from './pages/AppPage';
-import AppContextProvider from "../src/context/AppContext"
+import AppContextProvider, { AppContext } from "../src/context/AppContext"
 import Header from './components/Header';
+import {AuthNote} from "./components/AuthNote"
+import "./styles/style.css"
 
 function App() {
   return (
     <AppContextProvider>
-      <>
-        <Header />
-        <AppPage />
-      </>
+      <AppContext.Consumer>
+        {({ token }) => (
+          <>
+            <Header />
+            {!!token && <AppPage />}
+            {!token && <AuthNote />}
+          </>
+        )}
+      </AppContext.Consumer>
     </AppContextProvider>
     
   );
