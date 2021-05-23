@@ -9,7 +9,7 @@ interface Props {
 
 const ColorButton: React.FC<Props> = ({ active, color, onClick }) => {
     return (
-        <button className={"color-button"}  style={{ borderColor: active? "blue" : "darkgray", backgroundColor: color }} onClick={() => onClick()} />
+        <button data-testid={color} className={"color-button"}  style={{ borderColor: active? "blue" : "darkgray", backgroundColor: color }} onClick={() => onClick()} />
     )
 }
 

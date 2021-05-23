@@ -5,10 +5,8 @@ const Header = () => {
     const { token, login, logout } = useContext(AppContext)
 
     const authenticate = () => {
-        if (token) {
-            // login!(process.env.REACT_APP_EMAIL!, process.env.REACT_APP_PASSWORD!)
-            login!("swewe", "sdsds")
-
+        if (!token) {
+            login!(process.env.REACT_APP_EMAIL!, process.env.REACT_APP_PASSWORD!)
         } else {
             logout!()
         }

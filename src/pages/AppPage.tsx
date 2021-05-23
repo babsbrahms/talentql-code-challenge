@@ -138,6 +138,9 @@ export class AppPage extends Component<Props, State> {
             val = `Multiple ${shapes[0]} items`
         } else if ((shapes.length === 1) && (colors.length === 1)) {
             val = `${shapes[0][0]}${shapes[0].slice(1)} ${colors[0]} items`
+        } else {
+            // was not specified as in the requirement
+            val = "Multiple items"
         }
 
 
@@ -163,7 +166,7 @@ export class AppPage extends Component<Props, State> {
                 <section >
                     <h2 className="lead-text">{title} <span>({selectedItems.length})</span></h2>
 
-                    <div className="grid-container">
+                    <div data-testid={"items"} className="grid-container">
                     {selectedItems.map(({ color, shape}, index) => <Item key={`${shape}-${index}`} color={color} shape={shape} />)}
                     </div>
                 </section>
