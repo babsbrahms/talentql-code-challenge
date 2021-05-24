@@ -188,6 +188,7 @@ describe("Item change based on click events",  () => {
         fireEvent.click( screen.getByTestId("red"))
         
         container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("oval") )
+        
     })
 
 
@@ -264,7 +265,7 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
 
-        fireEvent.click(screen.getByTestId("round"))
+        fireEvent.click(screen.getByTestId("square"))
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
@@ -322,8 +323,8 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("yellow"))
 
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("round") )
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("darkgray") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("oval") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("lightblue") )
     })
 
 
@@ -349,7 +350,7 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("yellow"))
 
         container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("triangle") )
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("yellow") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("red") )
 
     })
 
@@ -376,7 +377,7 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("red"))
 
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("rectangle") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("square") )
         container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("yellow") )
     })
 })

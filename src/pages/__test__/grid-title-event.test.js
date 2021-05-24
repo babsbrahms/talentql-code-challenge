@@ -9,7 +9,7 @@ beforeEach(() => {
     render(<AppPage />)
 })
 
-describe("Grid title changes based on click events",  () => {
+describe("Grid title change based on click events",  () => {
     test("Clicking a color button should make the button inactive", () => {
         let redButton = screen.getByTestId("red");
         fireEvent.click(redButton)
