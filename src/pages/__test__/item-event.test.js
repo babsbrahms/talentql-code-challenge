@@ -2,16 +2,14 @@ import React from 'react'
 import AppPage from "../AppPage";
 import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import db from "../../database.json"
 
 afterAll(cleanup)
 
-beforeEach(() => {
-    render(<AppPage />)
-})
 
 describe("Item change based on click events",  () => {
     test("Clicking color red button should remove items with the color red", () => {
+        render(<AppPage />)
+
         let redButton = screen.getByTestId("red");
         fireEvent.click(redButton)
 
@@ -24,6 +22,8 @@ describe("Item change based on click events",  () => {
 
 
     test("Clicking color yellow button should remove items with the color yellow", () => {
+        render(<AppPage />)
+
         let redButton = screen.getByTestId("yellow");
         fireEvent.click(redButton)
 
@@ -34,62 +34,33 @@ describe("Item change based on click events",  () => {
         expect(result).toBeTruthy()
     })
 
-    test("Clicking circle button should remove items with the circle svg", () => {
-        let redButton = screen.getByTestId("red");
-        fireEvent.click(redButton)
+    test("Clicking round button should remove items with the round svg", () => {
+        const { container } = render(<AppPage />)
 
-        let circleSvg = screen.queryByRole("circle")
+        let roundButton = screen.getByTestId("round");
+        fireEvent.click(roundButton)
+
+        let circleSvg = container.querySelector(".round")
 
         expect(circleSvg).not.toBeInTheDocument()
     })
 
-    test("Clicking circle button should remove circle svg, click it again should add it", () => {
-        let redButton = screen.getByTestId("red");
-        fireEvent.click(redButton)
+    test("Clicking triangle button should remove items with the triangle svg", () => {
+        const { container } = render(<AppPage />)
 
-        expect(queryByRole("circle")).not.toBeInTheDocument()
+        let button = screen.getByTestId("triangle");
+        fireEvent.click(button)
 
-        fireEvent.click(redButton)
+        let svg = container.querySelector(".triangle")
 
-        expect(queryByRole("circle")).toBeInTheDocument()
-    })
-
-    test("Clicking triangle button should remove items with the polygon svg", () => {
-        let redButton = screen.getByTestId("red");
-        fireEvent.click(redButton)
-
-        let polygonSvg = screen.queryByRole("polygon")
-
-        expect(polygonSvg).not.toBeInTheDocument()
+        expect(svg).not.toBeInTheDocument()
     })
     
 
-    test("Clicking a shape button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
 
-        let roundButton = screen.getByTestId("round");
-        fireEvent.click(roundButton)
-        
-        let gridTitle2 = screen.getByText("Multiple items")
-        expect(gridTitle2).toBeInTheDocument()
-    })
-
-
-    test("Clicking a color button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-
-
-        let roundButton = screen.getByTestId("green");
-        fireEvent.click(roundButton)
-        
-        let gridTitle2 = screen.getByText("Multiple items")
-        expect(gridTitle2).toBeInTheDocument()
-    })
-
-    test("Clicking all shape button except rectangle should change grid title to All rectangle items", () => {
+    test("Clicking all shape buttons except rectangle should keep only rectangle items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -101,11 +72,12 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("square"))
         
-        expect(screen.getByText("All rectangle items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("rectangle") )
     })
     
 
-    test("Clicking all shape button except square should change grid title to All square items", () => {
+    test("Clicking all shape button except square should keep only square items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -117,10 +89,11 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        expect(screen.getByText("All square items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("square") )
     })
 
-    test("Clicking all shape button except oval should change grid title to All oval items", () => {
+    test("Clicking all shape button except oval should keep only oval items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -132,11 +105,13 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        expect(screen.getByText("All oval items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("oval") )
+
     })
 
 
-    test("Clicking all color button except darkgray should change grid title to All darkgray items", () => {
+    test("Clicking all color button except darkgray should keep darkgray color items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -150,11 +125,12 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
         
-        expect(screen.getByText("All darkgray items")).toBeInTheDocument()
+        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: darkgray") )
     })
 
 
-    test("Clicking all color button except red should change grid title to All red items", () => {
+    test("Clicking all color button except red should only red items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -168,11 +144,15 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
         
-        expect(screen.getByText("All red items")).toBeInTheDocument()
+        let itemSection = screen.getByTestId("items")
+
+        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: red") )
+
     })
 
 
-    test("Clicking all color button except yellow should change grid title to All yellow items", () => {
+    test("Clicking all color button except yellow should keep only yellow items in the DOM", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -186,13 +166,13 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
         
-        expect(screen.getByText("All yellow items")).toBeInTheDocument()
+        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: yellow") )
+
     })
 
 
-    test("Clicking all color button except lightblue should change grid title to All lightblue items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
+    test("Clicking all color button except lightblue should keep only lightblue items in the DOM", () => {
+        const { container } = render(<AppPage />)
 
         fireEvent.click(screen.getByTestId("darkgray"))
      
@@ -203,102 +183,14 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("red"))
      
         fireEvent.click(screen.getByTestId("yellow"))
-        
-        expect(screen.getByText("All lightblue items")).toBeInTheDocument()
+
+        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: ligthblue") )
+
     })
 
 
-    test("Clicking some color button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-
-        fireEvent.click(screen.getByTestId("darkgray"))
-     
-        fireEvent.click(screen.getByTestId("royalblue"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking some color button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-     
-        fireEvent.click(screen.getByTestId("yellow"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking some color button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-
-     
-        fireEvent.click(screen.getByTestId("royalblue"))
-     
-        fireEvent.click(screen.getByTestId("green"))
-     
-        fireEvent.click(screen.getByTestId("red"))
-             
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-    
-
-    test("Clicking some shape button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-     
-        fireEvent.click(screen.getByTestId("round"))
-     
-        fireEvent.click( screen.getByTestId("rectangle"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking some shape button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-
-        fireEvent.click(screen.getByTestId("square"))
-    
-     
-        fireEvent.click( screen.getByTestId("rectangle"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking some shape button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-     
-        fireEvent.click(screen.getByTestId("triangle"))
-     
-        fireEvent.click( screen.getByTestId("rectangle"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking some shape button and color button should change grid title to Multiple items", () => {
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
-
-        fireEvent.click(screen.getByTestId("square"))
-     
-        fireEvent.click(screen.getByTestId("round"))
-     
-        fireEvent.click(screen.getByTestId("red"))
-     
-        fireEvent.click( screen.getByTestId("green"))
-        
-        expect(screen.getByText("Multiple items")).toBeInTheDocument()
-    })
-
-
-    test("Clicking all shape button except oval and clicking any shape button should change grid title to Multiple oval items", () => {
+    test("Clicking all shape button except oval and clicking any color button should keep only oval items of ", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -312,11 +204,12 @@ describe("Item change based on click events",  () => {
 
         fireEvent.click( screen.getByTestId("red"))
         
-        expect(screen.getByText("Multiple oval items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("oval") )
     })
 
 
-    test("Clicking all shape button except round and clicking any shape button(s) should change grid title to Multiple round items", () => {
+    test("Clicking all shape button except round and clicking any color button(s) should only keep Multiple round items", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -332,10 +225,11 @@ describe("Item change based on click events",  () => {
 
         fireEvent.click( screen.getByTestId("green"))
         
-        expect(screen.getByText("Multiple round items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("circle") )
     })
 
-    test("Clicking all shape button except triangle and clicking any shape button(s) should change grid title to Multiple triangle items", () => {
+    test("Clicking all shape button except triangle and clicking any color button(s) should only keep Multiple triangle items", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -353,11 +247,12 @@ describe("Item change based on click events",  () => {
 
         fireEvent.click( screen.getByTestId("darkgray"))
         
-        expect(screen.getByText("Multiple triangle items")).toBeInTheDocument()
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("rectange") )    
     })
 
 
-    test("Clicking all color button except darkgray and any color(s) should change grid title to Multiple darkgray items", () => {
+    test("Clicking all color button except darkgray and any color(s) should only keep Multiple darkgray items", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -375,11 +270,12 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        expect(screen.getByText("Multiple darkgray items")).toBeInTheDocument()
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
     })
 
 
-    test("Clicking all color button except yellow and any color(s) should change grid title to Multiple yellow items", () => {
+    test("Clicking all color button except yellow and any color(s) should only keep Multiple yellow items", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -397,11 +293,15 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        expect(screen.getByText("Multiple yellow items")).toBeInTheDocument()
+        let itemSection = screen.getByTestId("items")
+
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
+
     })
 
 
-    test("Clicking all color button except lightblue and any color(s) should change grid title to Multiple lightblue items", () => {
+    test("Clicking all color button except lightblue and any color(s) should only keep Multiple lightblue items", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -419,12 +319,14 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        expect(screen.getByText("Multiple lightblue items")).toBeInTheDocument()
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: lightblue") )
+
     })
 
 
 
-    test("Clicking all color button and shape except lightblue and oval should change grid title to Oval lightblue items", () => {
+    test("Clicking all color button and shape except lightblue and oval should ony keep Oval items with lightblue color", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -446,12 +348,14 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("darkgray"))
      
         fireEvent.click(screen.getByTestId("yellow"))
-        
-        expect(screen.getByText("Oval lightblue items")).toBeInTheDocument()
+
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("circle") )
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
     })
 
 
-    test("Clicking all color button and shape except red and triangle should change grid title to Triangle red items", () => {
+    test("Clicking all color button and shape except red and triangle should change only keep Triangle items with red color", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -473,12 +377,15 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("darkgray"))
      
         fireEvent.click(screen.getByTestId("yellow"))
-        
-        expect(screen.getByText("Triangle red items")).toBeInTheDocument()
+
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("triangle") )
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
+
     })
 
 
-    test("Clicking all color button and shape except yellow and square should change grid title to Square yellow items", () => {
+    test("Clicking all color button and shape except yellow and square should only keep square items with yellow color", () => {
+        const { container } = render(<AppPage />)
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -500,7 +407,8 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("darkgray"))
      
         fireEvent.click(screen.getByTestId("red"))
-        
-        expect(screen.getByText("Square yellow items")).toBeInTheDocument()
+
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("rectangle") )
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
     })
 })
