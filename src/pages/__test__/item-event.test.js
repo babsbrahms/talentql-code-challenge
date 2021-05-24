@@ -210,7 +210,7 @@ describe("Item change based on click events",  () => {
         container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("round") )
     })
 
-    test("Clicking all shape button except triangle and clicking any color button(s) should only keep Multiple triangle items", () => {
+    test("Clicking all shape buttons except triangle and clicking any color button(s) should only keep Multiple triangle items", () => {
         const { container } = render(<AppPage />)
 
         fireEvent.click(screen.getByTestId("square"))
@@ -227,7 +227,7 @@ describe("Item change based on click events",  () => {
 
         fireEvent.click( screen.getByTestId("darkgray"))
         
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("rectange") )    
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("triangle") )    
     })
 
 
