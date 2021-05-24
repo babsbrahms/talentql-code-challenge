@@ -3,11 +3,11 @@ import AppPage from "../AppPage";
 import { cleanup, render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-afterAll(cleanup)
+afterEach(cleanup)
 
 
 describe("Item change based on click events",  () => {
-    test("Clicking color red button should remove items with the color red", () => {
+    test("Clicking the red color button should remove items with the red color", () => {
         render(<AppPage />)
 
         let redButton = screen.getByTestId("red");
@@ -21,7 +21,7 @@ describe("Item change based on click events",  () => {
     })
 
 
-    test("Clicking color yellow button should remove items with the color yellow", () => {
+    test("Clicking the yellow color button should remove items with the yellow color ", () => {
         render(<AppPage />)
 
         let redButton = screen.getByTestId("yellow");
@@ -34,15 +34,15 @@ describe("Item change based on click events",  () => {
         expect(result).toBeTruthy()
     })
 
-    test("Clicking round button should remove items with the round svg", () => {
+    test("Clicking the round shape button should remove round svg items", () => {
         const { container } = render(<AppPage />)
 
         let roundButton = screen.getByTestId("round");
         fireEvent.click(roundButton)
 
-        let circleSvg = container.querySelector(".round")
+        let svg = container.querySelector(".round")
 
-        expect(circleSvg).not.toBeInTheDocument()
+        expect(svg).not.toBeInTheDocument()
     })
 
     test("Clicking triangle button should remove items with the triangle svg", () => {
@@ -61,8 +61,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all shape buttons except rectangle should keep only rectangle items in the DOM", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("oval"))
      
@@ -76,10 +74,8 @@ describe("Item change based on click events",  () => {
     })
     
 
-    test("Clicking all shape button except square should keep only square items in the DOM", () => {
+    test("Clicking all shape buttons except square should keep only square items in the DOM", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("oval"))
      
@@ -92,10 +88,8 @@ describe("Item change based on click events",  () => {
         container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("square") )
     })
 
-    test("Clicking all shape button except oval should keep only oval items in the DOM", () => {
+    test("Clicking all shape buttons except oval should keep only oval items in the DOM", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -110,10 +104,8 @@ describe("Item change based on click events",  () => {
     })
 
 
-    test("Clicking all color button except darkgray should keep darkgray color items in the DOM", () => {
+    test("Clicking all color buttons except darkgray should keep darkgray colored items in the DOM", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("red"))
      
@@ -125,74 +117,64 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
         
-        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: darkgray") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
     })
 
 
-    test("Clicking all color button except red should only red items in the DOM", () => {
-        const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
+    // test("Clicking all color buttons except red should only keep red colored items in the DOM", () => {
+    //     const { container } = render(<AppPage />)
 
-        fireEvent.click(screen.getByTestId("darkgray"))
+    //     fireEvent.click(screen.getByTestId("darkgray"))
      
-        fireEvent.click(screen.getByTestId("royalblue"))
+    //     fireEvent.click(screen.getByTestId("royalblue"))
      
-        fireEvent.click(screen.getByTestId("green"))
+    //     fireEvent.click(screen.getByTestId("green"))
      
-        fireEvent.click(screen.getByTestId("yellow"))
+    //     fireEvent.click(screen.getByTestId("yellow"))
      
-        fireEvent.click(screen.getByTestId("lightblue"))
+    //     fireEvent.click(screen.getByTestId("lightblue"))
+
+    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: red") )
+
+    // })
+
+
+    // test("Clicking all color buttons except red should keep red colored items in the DOM", () => {
+    //     const { container } = render(<AppPage />)
+
+    //     fireEvent.click(screen.getByTestId("darkgray"))
+     
+    //     fireEvent.click(screen.getByTestId("royalblue"))
+     
+    //     fireEvent.click(screen.getByTestId("green"))
+     
+    //     fireEvent.click(screen.getByTestId("yellow"))
+     
+    //     fireEvent.click(screen.getByTestId("lightblue"))
         
-        let itemSection = screen.getByTestId("items")
-
-        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: red") )
-
-    })
+    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: red") )
+    // })
 
 
-    test("Clicking all color button except yellow should keep only yellow items in the DOM", () => {
-        const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
+    // test("Clicking all color button except lightblue should keep only lightblue items in the DOM", () => {
+    //     const { container } = render(<AppPage />)
 
-        fireEvent.click(screen.getByTestId("darkgray"))
+    //     fireEvent.click(screen.getByTestId("darkgray"))
      
-        fireEvent.click(screen.getByTestId("royalblue"))
+    //     fireEvent.click(screen.getByTestId("royalblue"))
      
-        fireEvent.click(screen.getByTestId("green"))
+    //     fireEvent.click(screen.getByTestId("green"))
      
-        fireEvent.click(screen.getByTestId("red"))
+    //     fireEvent.click(screen.getByTestId("red"))
      
-        fireEvent.click(screen.getByTestId("lightblue"))
-        
-        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: yellow") )
+    //     fireEvent.click(screen.getByTestId("yellow"))
 
-    })
-
-
-    test("Clicking all color button except lightblue should keep only lightblue items in the DOM", () => {
-        const { container } = render(<AppPage />)
-
-        fireEvent.click(screen.getByTestId("darkgray"))
-     
-        fireEvent.click(screen.getByTestId("royalblue"))
-     
-        fireEvent.click(screen.getByTestId("green"))
-     
-        fireEvent.click(screen.getByTestId("red"))
-     
-        fireEvent.click(screen.getByTestId("yellow"))
-
-        container.querySelectorAll("[data-testid=items] > svg").forEach(el => expect(el.firstElementChild).toHaveStyle("fill: ligthblue") )
-
-    })
+    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: lightblue") )
+    // })
 
 
     test("Clicking all shape button except oval and clicking any color button should keep only oval items of ", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -210,8 +192,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all shape button except round and clicking any color button(s) should only keep Multiple round items", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -225,13 +205,11 @@ describe("Item change based on click events",  () => {
 
         fireEvent.click( screen.getByTestId("green"))
         
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("circle") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("round") )
     })
 
     test("Clicking all shape button except triangle and clicking any color button(s) should only keep Multiple triangle items", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -253,8 +231,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all color button except darkgray and any color(s) should only keep Multiple darkgray items", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("red"))
      
@@ -276,8 +252,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all color button except yellow and any color(s) should only keep Multiple yellow items", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("red"))
      
@@ -302,8 +276,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all color button except lightblue and any color(s) should only keep Multiple lightblue items", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("red"))
      
@@ -327,8 +299,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all color button and shape except lightblue and oval should ony keep Oval items with lightblue color", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -349,15 +319,13 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("yellow"))
 
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("circle") )
+        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("round") )
         container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
     })
 
 
     test("Clicking all color button and shape except red and triangle should change only keep Triangle items with red color", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("square"))
      
@@ -386,8 +354,6 @@ describe("Item change based on click events",  () => {
 
     test("Clicking all color button and shape except yellow and square should only keep square items with yellow color", () => {
         const { container } = render(<AppPage />)
-        let gridTitle = screen.getByText("All items")
-        expect(gridTitle).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("triangle"))
      

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from "../context/AppContext";
+import loginIcon from "../utils/login.svg"
+import logoutIcon from "../utils/logout.svg"
 
 const Header = () => {
     const { token, login, logout } = useContext(AppContext)
@@ -19,7 +21,7 @@ const Header = () => {
             </h1>
 
             <span onClick={() => authenticate()}>
-                {token? "Logout 🔒" : "Login 🔓"}
+                {token? `Logout` : `Login`} {"  "} <img className={"auth-icon"} src={token? logoutIcon: loginIcon} />
             </span>
         </nav>
     )

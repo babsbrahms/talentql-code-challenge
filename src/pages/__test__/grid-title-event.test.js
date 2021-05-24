@@ -10,7 +10,7 @@ beforeEach(() => {
 })
 
 describe("Grid title changes based on click events",  () => {
-    test("Clicking a color button should disable the button", () => {
+    test("Clicking a color button should make the button inactive", () => {
         let redButton = screen.getByTestId("red");
         fireEvent.click(redButton)
         expect(redButton).toHaveStyle("border-color: darkgray")
@@ -34,7 +34,7 @@ describe("Grid title changes based on click events",  () => {
     })
     
     
-    test("Clicking a shape button should disable the button", () => {
+    test("Clicking a shape button should make the button inactive", () => {
         let ovalButton = screen.getByTestId("oval");
         fireEvent.click(ovalButton)
         expect(ovalButton).toHaveStyle("border-color: darkgray")
@@ -53,7 +53,7 @@ describe("Grid title changes based on click events",  () => {
     
     })
 
-    test("Disabling all shape button should re-enable all", () => {
+    test("Clicking all shape buttons should make the buttons inactive and active after the last button click", () => {
         let shapesDiv = screen.getByTestId("shapes");
 
         Array.from(shapesDiv.children).forEach((el) => {
@@ -64,7 +64,8 @@ describe("Grid title changes based on click events",  () => {
         expect(roundButton).toHaveStyle("border-color: blue")
     })
 
-    test("Disabling all color button should re-enable all", () => {
+
+    test("Clicking all color buttons should make the buttons inactive and active after the last button click", () => {
         let shapesDiv = screen.getByTestId("colors");
 
         Array.from(shapesDiv.children).forEach((el) => {
@@ -75,7 +76,7 @@ describe("Grid title changes based on click events",  () => {
         expect(roundButton).toHaveStyle("border-color: blue")
     })
 
-    test("Clicking a shape button should change grid title to Multiple items", () => {
+    test("Clicking a shape button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -88,7 +89,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking a color button should change grid title to Multiple items", () => {
+    test("Clicking a color button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -100,7 +101,7 @@ describe("Grid title changes based on click events",  () => {
         expect(gridTitle2).toBeInTheDocument()
     })
 
-    test("Clicking all shape button except rectangle should change grid title to All rectangle items", () => {
+    test("Clicking all shape button except rectangle should change the grid title to 'All rectangle items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -116,7 +117,7 @@ describe("Grid title changes based on click events",  () => {
     })
     
 
-    test("Clicking all shape button except square should change grid title to All square items", () => {
+    test("Clicking all shape button except square should change the grid title to  'All square items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -131,7 +132,7 @@ describe("Grid title changes based on click events",  () => {
         expect(screen.getByText("All square items")).toBeInTheDocument()
     })
 
-    test("Clicking all shape button except oval should change grid title to All oval items", () => {
+    test("Clicking all shape button except oval should change the grid title to 'All oval items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -147,7 +148,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except darkgray should change grid title to All darkgray items", () => {
+    test("Clicking all color button except darkgray should change the grid title to 'All darkgray items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -165,7 +166,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except red should change grid title to All red items", () => {
+    test("Clicking all color button except red should change the grid title to 'All red items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -183,7 +184,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except yellow should change grid title to All yellow items", () => {
+    test("Clicking all color button except yellow should change the grid title to 'All yellow items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -201,7 +202,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except lightblue should change grid title to All lightblue items", () => {
+    test("Clicking all color button except lightblue should change the grid title to 'All lightblue items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -219,7 +220,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some color button should change grid title to Multiple items", () => {
+    test("Clicking some color button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -231,7 +232,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some color button should change grid title to Multiple items", () => {
+    test("Clicking some color button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
      
@@ -241,7 +242,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some color button should change grid title to Multiple items", () => {
+    test("Clicking some color button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -256,7 +257,7 @@ describe("Grid title changes based on click events",  () => {
     })
     
 
-    test("Clicking some shape button should change grid title to Multiple items", () => {
+    test("Clicking some shape button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
      
@@ -268,7 +269,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some shape button should change grid title to Multiple items", () => {
+    test("Clicking some shape button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -281,7 +282,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some shape button should change grid title to Multiple items", () => {
+    test("Clicking some shape button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
      
@@ -293,7 +294,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking some shape button and color button should change grid title to Multiple items", () => {
+    test("Clicking some shape button and color button should change the grid title to 'Multiple items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -309,7 +310,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all shape button except oval and clicking any color button should change grid title to Multiple oval items", () => {
+    test("Clicking all shape button except oval and clicking any color button should change the grid title to 'Multiple oval items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -327,7 +328,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all shape button except round and clicking any color button(s) should change grid title to Multiple round items", () => {
+    test("Clicking all shape button except round and clicking any color button(s) should change the grid title to 'Multiple round items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -346,7 +347,7 @@ describe("Grid title changes based on click events",  () => {
         expect(screen.getByText("Multiple round items")).toBeInTheDocument()
     })
 
-    test("Clicking all shape buttons except triangle and clicking any color button(s) should change grid title to Multiple triangle items", () => {
+    test("Clicking all shape buttons except triangle and clicking any color button(s) should change the grid title to 'Multiple triangle items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -368,7 +369,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except darkgray and any color(s) should change grid title to Multiple darkgray items", () => {
+    test("Clicking all color button except darkgray and any color(s) should change the grid title to 'Multiple darkgray items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -390,7 +391,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except yellow and any color(s) should change grid title to Multiple yellow items", () => {
+    test("Clicking all color button except yellow and any color(s) should change the grid title to 'Multiple yellow items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -412,7 +413,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button except lightblue and any color(s) should change grid title to Multiple lightblue items", () => {
+    test("Clicking all color button except lightblue and any color(s) should change the grid title to 'Multiple lightblue items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -435,7 +436,7 @@ describe("Grid title changes based on click events",  () => {
 
 
 
-    test("Clicking all color button and shape except lightblue and oval should change grid title to Oval lightblue items", () => {
+    test("Clicking all color button and shape except lightblue and oval should change the grid title to 'Oval lightblue items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -462,7 +463,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button and shape except red and triangle should change grid title to Triangle red items", () => {
+    test("Clicking all color button and shape except red and triangle should change the grid title to 'Triangle red items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 
@@ -489,7 +490,7 @@ describe("Grid title changes based on click events",  () => {
     })
 
 
-    test("Clicking all color button and shape except yellow and square should change grid title to Square yellow items", () => {
+    test("Clicking all color button and shape except yellow and square should change the grid title to 'Square yellow items'", () => {
         let gridTitle = screen.getByText("All items")
         expect(gridTitle).toBeInTheDocument();
 

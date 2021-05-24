@@ -21,7 +21,7 @@ describe("Test default app state", () => {
     })
     
     
-    test("Shape button should be active by default", () => {
+    test("Shape buttons should be active by default", () => {
        let ovalButton = screen.getByTestId("oval");
        expect(ovalButton).toHaveStyle("border-color: blue")
     
@@ -48,7 +48,7 @@ describe("Test default app state", () => {
     })
     
     
-    test("Color button should be active by default", () => {
+    test("Color buttons should be active by default", () => {
        let redButton = screen.getByTestId("red");
        expect(redButton).toHaveStyle("border-color: blue")
     
@@ -69,7 +69,7 @@ describe("Test default app state", () => {
     })
 
 
-    test("The name of a color button should be it background color", () => {
+    test("Color buttons shoulld have different backround color", () => {
         let redButton = screen.getByTestId("red");
         expect(redButton).toHaveStyle("background-color: red")
      
@@ -90,26 +90,26 @@ describe("Test default app state", () => {
      })
     
     
-    test("There should be a color header", () => {
+    test("There should be a color header text", () => {
         let header = screen.getByText("Colors")
     
         expect(header).toBeInTheDocument()
     })
     
-    test("There should be a shape header", () => {
+    test("There should be a shape header text", () => {
         let header = screen.getByText("Shapes")
     
         expect(header).toBeInTheDocument()
     })
     
     
-    test("There should be filter header", () => {
+    test("There should be filter header text", () => {
         let header = screen.getByText("Filters")
     
         expect(header).toBeInTheDocument()
     })
 
-    test("Number of items should be equal to the content of the database file", () => {
+    test("The number of items should be equal to the content of the database file", () => {
         let items = screen.getByTestId("items");
 
         expect(items.children.length).toBe(db.length)
