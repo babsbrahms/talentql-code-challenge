@@ -117,60 +117,61 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("lightblue"))
         
-        container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
+        let items = Array.from(container.querySelectorAll(".item"));
+
+        if (items.length > 0) {
+            items.forEach(el => expect(el).toHaveClass("darkgray") )
+        }
+       
     })
 
 
-    // test("Clicking all color buttons except red should only keep red colored items in the DOM", () => {
-    //     const { container } = render(<AppPage />)
+    test("Clicking all color buttons except red should only keep red colored items in the DOM", () => {
+        const { container } = render(<AppPage />)
 
-    //     fireEvent.click(screen.getByTestId("darkgray"))
+        fireEvent.click(screen.getByTestId("darkgray"))
      
-    //     fireEvent.click(screen.getByTestId("royalblue"))
+        fireEvent.click(screen.getByTestId("royalblue"))
      
-    //     fireEvent.click(screen.getByTestId("green"))
+        fireEvent.click(screen.getByTestId("green"))
      
-    //     fireEvent.click(screen.getByTestId("yellow"))
+        fireEvent.click(screen.getByTestId("yellow"))
      
-    //     fireEvent.click(screen.getByTestId("lightblue"))
+        fireEvent.click(screen.getByTestId("lightblue"))
 
-    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: red") )
+        let items = Array.from(container.querySelectorAll(".item"));
 
-    // })
+        if (items.length > 0) {
+            items.forEach(el => expect(el).toHaveClass("red") )
+        } else {
+            expect(container.querySelector("red")).not.toBeInTheDocument()
+        }
 
-
-    // test("Clicking all color buttons except red should keep red colored items in the DOM", () => {
-    //     const { container } = render(<AppPage />)
-
-    //     fireEvent.click(screen.getByTestId("darkgray"))
-     
-    //     fireEvent.click(screen.getByTestId("royalblue"))
-     
-    //     fireEvent.click(screen.getByTestId("green"))
-     
-    //     fireEvent.click(screen.getByTestId("yellow"))
-     
-    //     fireEvent.click(screen.getByTestId("lightblue"))
-        
-    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: red") )
-    // })
+    })
 
 
-    // test("Clicking all color button except lightblue should keep only lightblue items in the DOM", () => {
-    //     const { container } = render(<AppPage />)
 
-    //     fireEvent.click(screen.getByTestId("darkgray"))
-     
-    //     fireEvent.click(screen.getByTestId("royalblue"))
-     
-    //     fireEvent.click(screen.getByTestId("green"))
-     
-    //     fireEvent.click(screen.getByTestId("red"))
-     
-    //     fireEvent.click(screen.getByTestId("yellow"))
 
-    //     container.querySelectorAll(".item").forEach(el => expect(el).toHaveStyle("fill: lightblue") )
-    // })
+    test("Clicking all color button except lightblue should keep only lightblue items in the DOM", () => {
+        const { container } = render(<AppPage />)
+
+        fireEvent.click(screen.getByTestId("darkgray"))
+     
+        fireEvent.click(screen.getByTestId("royalblue"))
+     
+        fireEvent.click(screen.getByTestId("green"))
+     
+        fireEvent.click(screen.getByTestId("red"))
+     
+        fireEvent.click(screen.getByTestId("yellow"))
+
+        let items = Array.from(container.querySelectorAll(".item"));
+
+        if (items.length > 0) {
+            items.forEach(el => expect(el).toHaveClass("lightblue") )
+        }
+
+    })
 
 
     test("Clicking all shape button except oval and clicking any color button should keep only oval items of ", () => {
@@ -246,7 +247,7 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("darkgray") )
     })
 
 
@@ -267,9 +268,7 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
         
-        let itemSection = screen.getByTestId("items")
-
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("yellow") )
 
     })
 
@@ -290,9 +289,14 @@ describe("Item change based on click events",  () => {
         fireEvent.click(screen.getByTestId("round"))
      
         fireEvent.click( screen.getByTestId("rectangle"))
-        
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: lightblue") )
 
+        let items = Array.from(container.querySelectorAll(".item"));
+
+        if (items.length > 0) {
+            items.forEach(el => expect(el).toHaveClass("lightblue") )
+
+        }
+        
     })
 
 
@@ -308,7 +312,6 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
 
-
         fireEvent.click(screen.getByTestId("red"))
      
         fireEvent.click(screen.getByTestId("royalblue"))
@@ -319,8 +322,8 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("yellow"))
 
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("round") )
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: darkgray") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("round") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("darkgray") )
     })
 
 
@@ -335,7 +338,6 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click( screen.getByTestId("rectangle"))
 
-
         fireEvent.click(screen.getByTestId("lightblue"))
      
         fireEvent.click(screen.getByTestId("royalblue"))
@@ -346,8 +348,8 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("yellow"))
 
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("triangle") )
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("triangle") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("yellow") )
 
     })
 
@@ -374,7 +376,7 @@ describe("Item change based on click events",  () => {
      
         fireEvent.click(screen.getByTestId("red"))
 
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveClass("rectangle") )
-        container.querySelectorAll("item").forEach(el => expect(el).toHaveStyle("fill: yellow") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("rectangle") )
+        container.querySelectorAll(".item").forEach(el => expect(el).toHaveClass("yellow") )
     })
 })
