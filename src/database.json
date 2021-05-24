@@ -18,5 +18,83 @@
     {
         "shape": "square",
         "color": "lightblue"
+    },
+    {
+        "shape": "square",
+        "color": "green"
+    },
+    {
+        "shape": "oval",
+        "color": "royalblue"
+    },
+    {
+        "shape": "round",
+        "color": "royalblue"
+    },
+    {
+        "shape": "triangle",
+        "color": "red"
+    },
+    {
+        "shape": "rectangle",
+        "color": "darkgray"
+    },
+    {
+        "shape": "oval",
+        "color": "royalblue"
+    },
+    {
+        "shape": "square",
+        "color": "lightblue"
+    },
+    
+
+    {
+        "shape": "square",
+        "color": "red"
+    },
+    {
+        "shape": "round",
+        "color": "royalblue"
+    },
+    {
+        "shape": "rectangle",
+        "color": "green"
+    },
+    {
+        "shape": "square",
+        "color": "yellow"
+    },
+    {
+        "shape": "triangle",
+        "color": "lightblue"
+    },
+    {
+        "shape": "oval",
+        "color": "green"
+    },
+    {
+        "shape": "round",
+        "color": "royalblue"
+    },
+    {
+        "shape": "triangle",
+        "color": "royalblue"
+    },
+    {
+        "shape": "rectangle",
+        "color": "red"
+    },
+    {
+        "shape": "triangle",
+        "color": "darkgray"
+    },
+    {
+        "shape": "round",
+        "color": "royalblue"
+    },
+    {
+        "shape": "oval",
+        "color": "lightblue"
     }
 ]
