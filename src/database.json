@@ -29,7 +29,7 @@
     },
     {
         "shape": "round",
-        "color": "royalblue"
+        "color": "red"
     },
     {
         "shape": "triangle",
@@ -41,7 +41,7 @@
     },
     {
         "shape": "oval",
-        "color": "royalblue"
+        "color": "green"
     },
     {
         "shape": "square",
@@ -79,7 +79,7 @@
     },
     {
         "shape": "triangle",
-        "color": "royalblue"
+        "color": "challenge"
     },
     {
         "shape": "rectangle",
